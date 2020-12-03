@@ -58,11 +58,9 @@ void traverse(char *fn, int indent) {
 
 int main(int argc,char *argv[])
 {
-   if (argc != 2)
-   {
-     printf("usage: opendir dirname\n");
-     exit(1);
-   }
-   traverse(argv[1]);
+  (void)argv;
+  (void)argc;
+  //  traverse("/", 0);
+  traverse(argv[1], 0);
    exit(0);
 }

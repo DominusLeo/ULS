@@ -26,7 +26,7 @@
 
 #include <uuid/uuid.h>
 
-struct dirent
+struct entry
 {
 char d_name[13];
 };
