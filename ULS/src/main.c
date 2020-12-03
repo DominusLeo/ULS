@@ -1,25 +1,68 @@
 #include "uls.h"
+#include <stdio.h>
 
-DIR *opendir(char *dirname);
 
-int main( void )
-{
-    DIR* dirp;
-    struct dirent* direntp;
+void traverse(char *fn, int indent) {
+  DIR *dir;
+  struct dirent *entry;
+  int count;
+  char path[1025];
+  struct stat info;
 
-    dirp = opendir( "/home/fred" );
-    if( dirp == NULL ) {
-        perror( "can't open /home/fred" );
-    } else {
-        for(;;) {
-            direntp = readdir( dirp );
-            if( direntp == NULL ) break;
+  for (count=0; count<indent; count++) printf("  ");
+  printf("%s\n", fn);
 
-            printf( "%s\n", direntp->d_name );
-        }
-        
-        closedir( dirp );
+  if ((dir = opendir(fn)) == NULL)
+    perror("opendir() error");
+  else {
+    while ((entry = readdir(dir)) != NULL) {
+      if (entry->d_name[0] != '.') {
+        strcpy(path, fn);
+        strcat(path, "/");
+        strcat(path, entry->d_name);
+        if (stat(path, &info) != 0)
+          fprintf(stderr, "stat() error on %s: %s\n", path,
+                  strerror(errno));
+        else if (S_ISDIR(info.st_mode))
+               traverse(path, indent+1);
+      }
     }
-    
-    return EXIT_SUCCESS;
+    closedir(dir);
+  }
+}
+
+// void traverse(char *dirname)
+// {
+//   DIR *dir;
+//   struct dirent *ent;
+// //   int count;
+// //   char path[1025];
+// //   struct stat info;
+
+//    printf("First pass on '%s':\n",dirname);
+//    if ((dir = opendir(dirname)) == NULL)
+//    {
+//      perror("Unable to open directory");
+//      exit(1);
+//    }
+//    while ((ent = readdir(dir)) != NULL)
+//      printf("%s\n",ent->d_name);
+
+//    printf("Second pass on '%s':\n",dirname);
+//    rewinddir(dir);
+//    while ((ent = readdir(dir)) != NULL)
+//      printf("%s\n",ent->d_name);
+//    if (closedir(dir) != 0)
+//      perror("Unable to close directory");
+// }
+
+int main(int argc,char *argv[])
+{
+   if (argc != 2)
+   {
+     printf("usage: opendir dirname\n");
+     exit(1);
+   }
+   traverse(argv[1]);
+   exit(0);
 }
