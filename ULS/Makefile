@@ -25,7 +25,12 @@ LMXI:=	$(LMXD)/inc
 INC		=	uls.h
 INCS	=	$(addprefix $(INCD)/, $(INC))
 
-SRC	= 		main.c mx_bzero.c mx_arrlen.c mx_arr_free.c mx_nbrlen.c mx_putchar_fd.c mx_putstr_fd.c uls_len_sort.c uls_print_file.c mx_strrchr.c uls_get_mode.c
+SRC	= 		main.c mx_bzero.c mx_arrlen.c mx_arr_free.c \
+			mx_nbrlen.c mx_putchar_fd.c mx_putstr_fd.c \
+			uls_len_sort.c uls_print_file.c mx_strrchr.c \
+			uls_get_mode.c uls_print_dir.c uls_output.c \
+			uls_flag.c uls_color.c uls_get.c uls_error.c \
+			uls_isname.c uls_dir.c
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
