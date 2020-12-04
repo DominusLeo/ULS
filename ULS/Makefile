@@ -25,7 +25,7 @@ LMXI:=	$(LMXD)/inc
 INC		=	uls.h
 INCS	=	$(addprefix $(INCD)/, $(INC))
 
-SRC	= 		main.c mx_bzero.c
+SRC	= 		main.c mx_bzero.c mx_arrlen.c mx_arr_free.c mx_nbrlen.c
 
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))

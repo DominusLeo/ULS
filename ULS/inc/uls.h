@@ -38,6 +38,8 @@
 # define LS_FLAG_SIZE	10
 # define LS_MODE_SIZE	11
 
+# define MAX(a, b) (a > b ? a : b)
+
 # define R_BIG			0
 # define R_MINI			1
 # define A_MINI			2
@@ -48,6 +50,11 @@
 # define Y_MINI			7
 # define S_BIG			8
 # define A_BIG			9
+
+# define LI uls->i
+# define LJ uls->j
+# define PI path->i
+# define PJ path->j
 
 typedef struct			s_uls {
 	char				**file_path;
@@ -67,3 +74,8 @@ typedef struct			s_lspath {
 }                       t_lspath;
 
 void mx_bzero(void *s, size_t n);
+size_t	mx_arrlen(char **arr);
+void	mx_arr_free(char ***arr);
+long long int mx_nbrlen(long long int nb);
+void mx_putstr_fd(char const *s, int fd);
+void mx_putchar_fd(char c, int fd);
