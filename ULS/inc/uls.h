@@ -79,3 +79,12 @@ void	mx_arr_free(char ***arr);
 long long int mx_nbrlen(long long int nb);
 void mx_putstr_fd(char const *s, int fd);
 void mx_putchar_fd(char c, int fd);
+void		uls_len_sort(char ***arr);
+void		uls_base_sort(char ***arr);
+void		uls_time_sort(char ***arr, int i, int j);
+void		uls_sort(char ***arr, int index);
+struct stat *uls_get_stat(char **path);
+void		uls_print_file(char *path, char *name, char *flg, int *width);
+char	*mx_strrchr(const char *s, int c);
+int			uls_get_mode(char **line, char *path, mode_t mode);
+
