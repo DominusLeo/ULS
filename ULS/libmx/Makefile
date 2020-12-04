@@ -1,46 +1,48 @@
-NAME = libmx.a
-SRC_DIR = src
-OBJ_DIR = obj
-INC_DIR = inc
-SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC_FILES:%.c=%.o)))
-INC_FILES = $(wildcard $(INC_DIR)/*.h)
-CC = clang
-CFLAGS = -std=c11 $(addprefix -W, all extra error pedantic) -g
-AR = ar
-AFLAGS = rcs
-MKDIR = mkdir -p
-RM = rm -rf
+NAME = ft_ls
 
+### PATH ###
+SRCS_PATH = srcs/
+OBJ_PATH  = obj/
+LIBFT_PATH = libft/
 
+FLAGS = -Wall -Werror -Wextra
+INC = -I ./includes/ -I ./$(LIBFT_PATH)includes/
+
+SRCS_NAME = main.c \
+			parsing.c \
+			add_new_file.c \
+			sort_list.c \
+			display_all.c\
+			display_list.c \
+			display_detailed_list.c \
+			display_list_items.c \
+			misc.c \
+
+SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
+OBJ = $(addprefix $(OBJ_PATH), $(SRCS_NAME:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES)
-	@$(AR) $(AFLAGS) $@ $^
-	@printf "\r\33[2K$@\t \033[32;1mcreated\033[0m\n"
+$(NAME): $(OBJ)
+	@make -C $(LIBFT_PATH)
+	@gcc $(FLAGS) $(OBJ) $(INC) -L $(LIBFT_PATH) -lft -o $(NAME)
+	@echo "\033[32mBinary \033[1;32m$(NAME)\033[1;0m\033[32m created.\033[0m"
 
-$(OBJ_FILES): | $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_FILES)
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)
-	@printf "\r\33[2K$(NAME)\033[33;1m\t compile \033[0m$(<:$(SRC_DIR)/%.c=%)\r"
-
-$(OBJ_DIR):
-	@$(MKDIR) $@
+$(OBJ_PATH)%.o: $(SRCS_PATH)%.c
+	@mkdir -p obj
+	@gcc -c $(FLAGS) $(INC) $< -o $@
+	@echo "\033[34m\033[1mCompilation of \033[0m\033[36m$(notdir $<)\033[1m\033[34m done.\033[0m"
 
 clean:
-	@$(RM) $(OBJ_DIR)
-	@printf "$(OBJ_DIR) in $(NAME)\t \033[31;1mdeleted\033[0m\n"
+	@make -C $(LIBFT_PATH)/ clean
+	@/bin/rm -rf $(OBJ_PATH)
+	@echo "\033[31mObjects files \033[1;31m$(OBJS_LIST)\033[1;0m\033[31m removed.\033[0m"
 
-uninstall:
-	@$(RM) $(OBJ_DIR)
-	@$(RM) $(NAME)
-	@@printf "$(NAME)\t \033[31;1muninstalled\033[0m\n"
+fclean: clean
+	@make -C $(LIBFT_PATH)/ fclean
+	@/bin/rm -rf $(NAME)
+	@echo "\033[31mBin \033[1;31m$(NAME)\033[1;0m\033[31m removed.\033[0m"
 
-run: all
-	@$(CC) $(CFLAGS) main.c $(NAME) -I $(INC_DIR)
-	./a.out
+re: fclean all
 
-reinstall: uninstall all
-.PHONY: all uninstall clean reinstall
+.PHONY: all, clean, fclean, re

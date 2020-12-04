@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                                              #
+#    Makefile                                                                  #
+#                                                                              #
+#    By: pmarchenko <pmarchenko@student.ucode.world>                   		   #
+#                                                                              #
+#    Created: 2017/11/13 14:20:39 by pmarchenko                            	   #
+#    Updated: 2018/01/15 14:29:46 by pmarchenko                                #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	=	uls
 
 CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic)
@@ -13,7 +25,7 @@ LMXI:=	$(LMXD)/inc
 INC		=	uls.h
 INCS	=	$(addprefix $(INCD)/, $(INC))
 
-SRC	= 		main.c 
+SRC	= 		main.c mx_bzero.c
 
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
