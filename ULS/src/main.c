@@ -1,4 +1,5 @@
 #include "uls.h"
+#include <stdio.h>
 
 struct stat *uls_get_stat(char **path);
 void uls_print_dir(char *path, char *flag);
@@ -300,6 +301,8 @@ int uls_readdir(t_uls *uls, char *path, char *flag) {
         return (0);
     }
     uls_file_count(uls, flag, path);
+    buf = mx_strjoin(path, "/");
+	uls->i = 0;
     while (dir) {
 		if (flag[A_MINI] || (flag[A_BIG]
 			&& mx_strcmp(dir->d_name, ".")
