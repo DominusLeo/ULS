@@ -158,7 +158,7 @@ static void		uls_lobi(t_lspath *path)
 	if (path->dirs[0] && path->files[0])
 		write(1, "\n", 1);
 	if (path->dirs[0] && (path->files[0] || path->e_path[0] || path->dirs[1]))
-		printf("%s:\n", path->dirs[0]);
+		ft_printf("%s:\n", path->dirs[0]);
 	while (path->dirs[PI])
 	{
 		uls_isdir(path->dirs[PI]);
@@ -168,7 +168,7 @@ static void		uls_lobi(t_lspath *path)
 			uls_print_dir(path->dirs[PI], path->flags);
 		PI++;
 		if (path->dirs[PI])
-			printf("\n%s:\n", path->dirs[PI]);
+			ft_printf("\n%s:\n", path->dirs[PI]);
 	}
 }
 
@@ -176,6 +176,11 @@ int main(int argc, char **argv) {
     t_lspath path;
 
     (void)argv;
+    //wide of terminal window
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    //_____
+
     mx_bzero(path.flags, LS_FLAG_SIZE + 1); // bzero - заменить на memset
     if (argc == 1) {
         uls_print_dir(".", path.flags);

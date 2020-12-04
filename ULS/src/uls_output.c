@@ -10,7 +10,7 @@ void		uls_print_total(t_uls *uls) {
 		t += uls->file_stat[LI].st_blocks;
 		LI++;
 	}
-	printf("total %lld\n", t);
+	ft_printf("total %lld\n", t);//printf!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 void	uls_rev_output(t_uls *uls, char *flag)

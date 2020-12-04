@@ -54,12 +54,12 @@ void	uls_rev_bigr_flag(t_uls *uls, char *flag) {
 			&& mx_strcmp((mx_strrchr(uls->file_path[LI], '/') + 1), ".")
 			&& mx_strcmp((mx_strrchr(uls->file_path[LI], '/') + 1), "..")))
 		{
-			printf("\n%s:\n", uls->file_path[LI]);
+            ft_printf("\n%s:\n", uls->file_path[LI]);
 			uls_print_dir(uls->file_path[LI], flag);
 		}
 		else if (errno == 13)
 		{
-			printf("\n%s:\n", uls->file_path[LI]);
+			ft_printf("\n%s:\n", uls->file_path[LI]);
 			uls_print_permision_error(uls->file_path[LI]);
 		}
 	}
@@ -76,12 +76,12 @@ void	uls_bigr_flag(t_uls *uls, char *flag) {
 			&& mx_strcmp((mx_strrchr(uls->file_path[LI], '/') + 1), ".")
 			&& mx_strcmp((mx_strrchr(uls->file_path[LI], '/') + 1), "..")))
 		{
-			printf("\n%s:\n", uls->file_path[LI]);
+            ft_printf("\n%s:\n", uls->file_path[LI]);
 			uls_print_dir(uls->file_path[LI], flag);
 		}
 		else if (errno == 13)
 		{
-			printf("\n%s:\n", uls->file_path[LI]);
+            ft_printf("\n%s:\n", uls->file_path[LI]);
 			uls_print_permision_error(uls->file_path[LI]);
 		}
 		LI++;
