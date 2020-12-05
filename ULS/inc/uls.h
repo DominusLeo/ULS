@@ -73,6 +73,13 @@ typedef struct			s_lspath {
 	int					j;
 }                       t_lspath;
 
+typedef struct s_for_matrix {
+    int term_weight;
+    int colunms;
+    int strings;
+    char **files;
+}               t_for_matrix;
+
 void mx_bzero(void *s, size_t n);
 size_t	mx_arrlen(char **arr);
 void	    mx_arr_free(char ***arr);

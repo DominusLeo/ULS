@@ -47,8 +47,9 @@ static void	uls_l(char *path, char *name, int *width)
 
 void		uls_print_file(char *path, char *name, char *flg, int *width)
 {
+
 	if (flg[L_MINI])
 		uls_l(path, name, width);
-	else
-        ft_printf("%s\n", name);//printf!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//	else
+//        ft_printf("%s\n", name);//printf!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }

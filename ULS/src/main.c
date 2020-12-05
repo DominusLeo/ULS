@@ -186,15 +186,19 @@ int main(int argc, char **argv) {
         uls_print_dir(".", path.flags);
     }
     else {
-        if (!(uls_get_args(&path, argv + 1)))
+        if (!(uls_get_args(&path, argv + 1))) {
             return (1);
-        if (!path.e_path[0] && !path.files[0] && !path.dirs[0])
-			uls_print_dir(".", path.flags);
-        else
-			uls_lobi(&path);
-		mx_arr_free(&path.files);
-		mx_arr_free(&path.dirs);
-		mx_arr_free(&path.e_path);
+        }
+        if (!path.e_path[0] && !path.files[0] && !path.dirs[0]) {
+            uls_print_dir(".", path.flags);
+        }
+        else {
+            uls_lobi(&path);
+        }
+        mx_arr_free(&path.files);
+        mx_arr_free(&path.dirs);
+        mx_arr_free(&path.e_path);
     }
+//    system("leaks -q uls");
     return 0;
 }

@@ -39,20 +39,42 @@ void	uls_output(t_uls *uls, char *flag) {
 	}
 	if (flag[R_MINI])
 	{
-		uls_rev_output(uls, flag);
-		return ;
-	}
-	if (flag[L_MINI] && uls->file_path[0])
-		uls_print_total(uls);
-	LI = 0;
-	while (uls->file_path[LI])
+        uls_rev_output(uls, flag);
+        return ;
+    }
+    if (flag[L_MINI] && uls->file_path[0]) {
+        uls_print_total(uls);
+    }
+    LI = 0;
+    // !!!!!!!!!!!!!!!!!!!
+    t_for_matrix *fil = NULL;
+    fil = (t_for_matrix *)malloc(sizeof(t_for_matrix) * 100);
+    fil->files = malloc(sizeof(char **) * 100);
+
+    for (int i = 0; uls->file_path[LI]; i++, LI++) {
+        fil->files[i] = mx_strrchr(uls->file_path[LI], '/') + 1;
+    }
+    LI = 0;
+    // !!!!!!!!!!!!!!!!!!!!!!
+    while (uls->file_path[LI])
 	{
-		if (flag[G_BIG])
-			uls_color(LI);
-		uls_print_file(uls->file_path[LI],
-		(mx_strrchr(uls->file_path[LI], '/') + 1), flag, uls->width);
-		LI++;
-	}
-	if (flag[G_BIG])
+        if (flag[G_BIG]) {
+            uls_color(LI);
+        }
+        uls_print_file(uls->file_path[LI], fil->files[LI], flag, uls->width);
+        LI++;
+    }
+    //we need work here
+    for (int i = 0; i < 2;){
+        for (size_t j = i++; j < mx_arrlen(fil->files); j += 2) {
+            ft_printf("%-40s\t", fil->files[j]);
+        }
+        ft_printf("\n");
+    }
+
+
+    //__________
+//    ft_printf("\nyou are here\n\n");
+    if (flag[G_BIG])
 		mx_printstr(LS_NORMAL);
 }
