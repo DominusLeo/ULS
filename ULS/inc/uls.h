@@ -75,7 +75,7 @@ typedef struct			s_lspath {
 
 typedef struct s_for_matrix {
     int term_weight;
-    int colunms;
+    int print_format;
     int strings;
     char **files;
 }               t_for_matrix;
@@ -118,3 +118,4 @@ void		uls_get_mem(t_lspath *path, char **argv);
 int		uls_isname_toolong(char *path);
 int		uls_isfile(char *path);
 int		uls_isdir(char *path) ;
+//void	uls_l(char *path, char *name, int *width);
