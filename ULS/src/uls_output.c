@@ -29,6 +29,16 @@ void	uls_rev_output(t_uls *uls, char *flag)
 		mx_printstr(LS_NORMAL);
 }
 
+int max_name_len(char **files) {
+    int max_len = -260;
+
+    for (int i = 0; files[i]; i++) {
+        if (mx_strlen(files[i]) > max_len)
+            max_len = mx_strlen(files[i]);
+    }
+    return max_len;
+}
+
 void	uls_output(t_uls *uls, char *flag) {
 	if (flag[L_MINI])
 	{
@@ -55,6 +65,12 @@ void	uls_output(t_uls *uls, char *flag) {
         fil->files[i] = mx_strrchr(uls->file_path[LI], '/') + 1;
     }
     LI = 0;
+
+    ft_printf("ammount files = %d\n", mx_arrlen(fil->files));
+    ft_printf("max_name = %d\n", max_name_len(fil->files));
+    ft_printf("weight term 2 = %d\n", fil->term_weight);
+    fil->colunms = fil->term_weight / max_name_len(fil->files) + 4;
+    printf("amm columns = %d\n", fil->colunms);
     // !!!!!!!!!!!!!!!!!!!!!!
     while (uls->file_path[LI])
 	{

@@ -177,9 +177,14 @@ int main(int argc, char **argv) {
 
     (void)argv;
     //wide of terminal window
+    t_for_matrix *fil = NULL;
+    fil = (t_for_matrix *)malloc(sizeof(t_for_matrix));
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    //_____
+    fil->term_weight = (int )malloc(sizeof(int) * 4);
+    fil->term_weight = w.ws_col;
+    ft_printf("weight term = %d\n", fil->term_weight);
+    //______
 
     mx_bzero(path.flags, LS_FLAG_SIZE + 1); // bzero - заменить на memset
     if (argc == 1) {
